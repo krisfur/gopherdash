@@ -1,6 +1,6 @@
 # Gopher‑Dash 🐹⛷️
 
-[![Go](https://github.com/your-user/gopherdash/actions/workflows/go.yml/badge.svg)](https://github.com/your-user/gopherdash/actions/workflows/go.yml)
+[![Go](https://github.com/krisfur/gopherdash/actions/workflows/go.yml/badge.svg)](https://github.com/krisfur/gopherdash/actions/workflows/go.yml)
 
 > A tiny terminal endless‑runner written in Go using [Bubble Tea](https://github.com/charmbracelet/bubbletea) & [Lip Gloss](https://github.com/charmbracelet/lipgloss).
 >
@@ -65,20 +65,6 @@ The game writes/reads a plain‑text integer from:
 ```
 
 It lives in whatever directory you launch the game from, so it vanishes if you move or delete the project folder. Feel free to add it to `.gitignore`.
-
----
-
-## Building Cross‑platform (release)
-
-Recommended [Goreleaser](https://goreleaser.com/):
-
-```bash
-brew install goreleaser  # or scoop/choco/apt
-cd gopherdash
-goreleaser release --clean
-```
-
-It will spit ready‑to‑share archives into `dist/` for macOS, Linux, and Windows.
 
 ---
 
