@@ -20,6 +20,12 @@
 
 ---
 
+## Screencast
+
+![screencast](screencast.gif)
+
+---
+
 ## Installation
 
 ```bash
