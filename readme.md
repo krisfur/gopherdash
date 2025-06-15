@@ -21,7 +21,7 @@
 ## Installation
 
 ```bash
-# Go ≥1.22
+# Go ≥1.24.4
 go install github.com/krisfur/gopherdash@latest
 ```
 
