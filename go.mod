@@ -1,4 +1,4 @@
-module gopherdash
+module github.com/krisfur/gopherdash
 
 go 1.24.4
 
