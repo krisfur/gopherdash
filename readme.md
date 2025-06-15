@@ -20,7 +20,7 @@
 
 ```bash
 # Go ≥1.22
-GO111MODULE=on go install github.com/<your‑user>/gopherdash@latest
+go install github.com/krisfur/gopherdash@latest
 ```
 
 The binary ends up in `$GOBIN` (usually `~/go/bin`). Add that to your `$PATH` or run with a full path.
@@ -28,7 +28,7 @@ The binary ends up in `$GOBIN` (usually `~/go/bin`). Add that to your `$PATH` or
 ### From source
 
 ```bash
-git clone https://github.com/<your‑user>/gopherdash.git
+git clone https://github.com/krisfur/gopherdash.git
 cd gopherdash
 go run .
 ```
@@ -68,7 +68,7 @@ It lives in whatever directory you launch the game from, so it vanishes if you m
 
 ## Building Cross‑platform (release)
 
-We recommend [Goreleaser](https://goreleaser.com/):
+Recommended [Goreleaser](https://goreleaser.com/):
 
 ```bash
 brew install goreleaser  # or scoop/choco/apt
