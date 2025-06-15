@@ -118,16 +118,18 @@ func main() {
 // HIGH‑SCORE PERSISTENCE
 // ----------------------------------------------------------------------------
 
-func scoreFilePath() string {
-	wd, err := os.Getwd()
+func highscorePath() string {
+	exe, err := os.Executable() // full path to the running binary
 	if err != nil {
-		return highScoreFile
+		// fallback: use CWD so the game still works during `go run`
+		return ".gopherdash_highscore"
 	}
-	return filepath.Join(wd, highScoreFile)
+	dir := filepath.Dir(exe)
+	return filepath.Join(dir, ".gopherdash_highscore")
 }
 
 func loadHighScore() int {
-	data, err := os.ReadFile(scoreFilePath())
+	data, err := os.ReadFile(highscorePath())
 	if err != nil {
 		return 0
 	}
@@ -139,7 +141,7 @@ func loadHighScore() int {
 }
 
 func saveHighScore(score int) {
-	_ = os.WriteFile(scoreFilePath(), []byte(strconv.Itoa(score)), 0o644)
+	_ = os.WriteFile(highscorePath(), []byte(strconv.Itoa(score)), 0o644)
 }
 
 // ----------------------------------------------------------------------------

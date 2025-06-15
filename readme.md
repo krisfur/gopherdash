@@ -2,6 +2,8 @@
 
 [![Go](https://github.com/krisfur/gopherdash/actions/workflows/go.yml/badge.svg)](https://github.com/krisfur/gopherdash/actions/workflows/go.yml)
 
+![Go](https://img.shields.io/badge/Go-00ADD8?style=flat&logo=go&logoColor=white)    [![Go](https://img.shields.io/badge/Go-1.24.4-blue)](https://go.dev/)
+
 > A tiny terminal endless‑runner written in Go using [Bubble Tea](https://github.com/charmbracelet/bubbletea) & [Lip Gloss](https://github.com/charmbracelet/lipgloss).
 >
 > Jump rocks, leap holes, chase the high score—all in your shell.
@@ -74,7 +76,7 @@ PRs welcome! Bug fixes, difficulty tweaks, new themes—go for it.
 
 1. Fork & clone
 2. `git checkout -b feature/my‑thing`
-3. Hack away, keep `go vet ./...` & `go test` green
+3. Hack away, keep the `go test` green
 4. Open a pull request
 
 ---
