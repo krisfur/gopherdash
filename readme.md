@@ -1,5 +1,7 @@
 # Gopher‑Dash 🐹⛷️
 
+[![Go](https://github.com/your-user/gopherdash/actions/workflows/go.yml/badge.svg)](https://github.com/your-user/gopherdash/actions/workflows/go.yml)
+
 > A tiny terminal endless‑runner written in Go using [Bubble Tea](https://github.com/charmbracelet/bubbletea) & [Lip Gloss](https://github.com/charmbracelet/lipgloss).
 >
 > Jump rocks, leap holes, chase the high score—all in your shell.
