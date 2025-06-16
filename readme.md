@@ -15,8 +15,8 @@
 * Emoji sprites (`🐹`, `🪨`, `🟫`) with double‑width handling
 * Adaptive layout: resizes to any terminal window
 * Gentle speed ramp with per‑run reset
-* Persistent high score stored locally in `./.gopherdash_highscore`
-* Game‑over cooldown & instant restart (`Space`)
+* Persistent high score stored locally in `.gopherdash_highscore` in your game's directory
+* Game‑over cooldown & restart (`Space`)
 
 ---
 
