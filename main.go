@@ -34,7 +34,7 @@ const (
 	// timing
 	startFrame      = 45 * time.Millisecond // initial ~22 FPS
 	accelFactor     = 0.998                 // gentle speed‑up per tick
-	cooldownSeconds = 2                     // restart delay on game‑over
+	cooldownSeconds = 1                     // restart delay on game‑over
 	gameOverTick    = 250 * time.Millisecond
 
 	// physics
@@ -47,12 +47,14 @@ const (
 	rockChar   = "🪨"
 
 	// gameplay
-	minGapCells   = 4 // logical cells between hazards
+	minGapCells   = 6 // logical cells between hazards
 	highScoreFile = ".gopherdash_highscore"
 
 	// UI strings
 	controlsRunning  = "W/Space = jump   Q = quit"
 	controlsGameOver = "Q = quit"
+
+	initialSafeTiles = 30 // initial number of safe tiles at the start of the game
 )
 
 // ----------------------------------------------------------------------------
@@ -89,6 +91,7 @@ type model struct {
 	playerY   int
 	velY      int
 	obstacles []obstacle
+	seeded    bool
 
 	// meta
 	highScore int
@@ -109,8 +112,10 @@ func initialModel() model {
 
 func main() {
 	p := tea.NewProgram(initialModel(), tea.WithAltScreen())
-	if err := p.Start(); err != nil {
+	// Run returns (finalModel, error). Ignore the model if you don’t need it.
+	if _, err := p.Run(); err != nil {
 		fmt.Println("error:", err)
+		os.Exit(1)
 	}
 }
 
@@ -156,17 +161,17 @@ func tickAfter(d time.Duration, gen int) tea.Cmd {
 func (m *model) recalcSizes() {
 	topRows, bottomRows := 1, 1 // inner heights for HUD & control bars
 	borders := 2 * 3            // three boxes, two border rows each
-	m.gameRows = m.h - topRows - bottomRows - borders
-	if m.gameRows < 5 {
-		m.gameRows = 5
-	}
+	m.gameRows = max(m.h-topRows-bottomRows-borders, 5)
 
-	m.gameCols = (m.w - 2) / 2 // logical cells (emoji width‑2)
-	if m.gameCols < 10 {
-		m.gameCols = 10
-	}
+	m.gameCols = max((m.w-2)/2, 10)
 
 	m.playerY = m.gameRows - 2 // one row above ground
+
+	// one-time seeding for the very first run
+	if !m.seeded && m.gameCols > 0 {
+		m.seedInitialObstacles()
+		m.seeded = true
+	}
 }
 
 // restart a new run
@@ -178,6 +183,8 @@ func (m *model) restart() tea.Cmd {
 	m.frameDur = startFrame
 	m.gameOver = false
 	m.tickGen++ // invalidate all pending ticks from previous run
+	m.seedInitialObstacles()
+	m.seeded = true
 	return tickAfter(m.frameDur, m.tickGen)
 }
 
@@ -353,6 +360,28 @@ func (m model) renderGame() string {
 		lines[i] = b.String()
 	}
 	return strings.Join(lines, "\n")
+}
+
+func (m *model) seedInitialObstacles() {
+	// wipe any leftovers
+	m.obstacles = nil
+
+	safeUntil := 2 + initialSafeTiles // first 15 tiles after player
+	lastX := -minGapCells             // ensures first spawn passes gap check
+
+	for x := safeUntil; x < m.gameCols; x++ {
+		if x-lastX < minGapCells { // keep spacing fair
+			continue
+		}
+		if rng.Float64() < 0.12 { // same spawn probability
+			kind := "hole"
+			if rng.Float64() < 0.5 {
+				kind = "rock"
+			}
+			m.obstacles = append(m.obstacles, obstacle{x, kind})
+			lastX = x
+		}
+	}
 }
 
 // ----------------------------------------------------------------------------
