@@ -47,8 +47,7 @@ const (
 	rockChar   = "🪨"
 
 	// gameplay
-	minGapCells   = 6 // logical cells between hazards
-	highScoreFile = ".gopherdash_highscore"
+	minGapCells = 6 // logical cells between hazards
 
 	// UI strings
 	controlsRunning  = "W/Space = jump   Q = quit"
