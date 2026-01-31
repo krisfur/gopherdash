@@ -1,4 +1,4 @@
-# Gopher‑Dash 🐹⛷️
+# Gopher‑Dash 🐹
 
 [![Go](https://github.com/krisfur/gopherdash/actions/workflows/go.yml/badge.svg)](https://github.com/krisfur/gopherdash/actions/workflows/go.yml)
 
@@ -7,16 +7,6 @@
 > A tiny terminal endless‑runner written in Go using [Bubble Tea](https://github.com/charmbracelet/bubbletea) & [Lip Gloss](https://github.com/charmbracelet/lipgloss).
 >
 > Jump rocks, leap holes, chase the high score—all in your shell.
-
----
-
-## Features
-
-* Emoji sprites (`🐹`, `🪨`, `🟫`) with double‑width handling
-* Adaptive layout: resizes to any terminal window
-* Gentle speed ramp with per‑run reset
-* Persistent high score stored locally in `.gopherdash_highscore` in your executable's directory
-* Game‑over cooldown & restart (`Space`)
 
 ---
 
@@ -45,45 +35,23 @@ go run .
 
 ---
 
+## Storing scores
+
+Persistent high score is stored locally in `.gopherdash_highscore` in your executable's directory. 
+
+If installing with go install it will be in your `$GOBIN` location, if compiling locally it will be right in that folder.
+
+To reset your high score just remove the file.
+
+---
+
+
 ## Controls
 
 | Key            | Action                             |
 | -------------- | ---------------------------------- |
 | `Space` or `W` | Jump / **Restart** after game over |
 | `Q`            | Quit immediately                   |
-
----
-
-## How to Play
-
-1. The hamster (`🐹`) stays in the centre; the world scrolls left.
-2. Press **Space** / **W** to hop over rocks (`🪨`) or holes (`🟫`).
-3. Distance increases every tick; speed **slowly** ramps up.
-4. Collide once and it’s **Game Over**—your distance compares to the high score.
-5. Wait the 2‑second countdown, then hit **Space** to dash again.
-
----
-
-## High Score File
-
-The game writes/reads a plain‑text integer from:
-
-```
-.gopherdash_highscore
-```
-
-It lives in whatever directory you launch the game from, so it vanishes if you move or delete the project folder. Feel free to add it to `.gitignore`.
-
----
-
-## Contributing
-
-PRs welcome! Bug fixes, difficulty tweaks, new themes—go for it.
-
-1. Fork & clone
-2. `git checkout -b feature/my‑thing`
-3. Hack away, keep the `go test` green
-4. Open a pull request
 
 ---
 
@@ -98,14 +66,14 @@ MIT © 2025 [Krzysztof Furman](https://www.kfurman.dev)
 
 ```
 ╭─────────────────────────────────────────╮
-│ Distance: 128                          │
+│ Distance: 128                           │
 ╰─────────────────────────────────────────╯
 ╭─────────────────────────────────────────╮
-│                                         │
-│            🐹                           │
-│🟫 🪨   🟫🟫🟫🟫🟫🟫🟫🟫🟫🟫🟫              │
+│                                         
+│            🐹                           
+│🟫 🪨   🟫🟫🟫🟫🟫🟫🟫🟫🟫🟫🟫         
 ╰─────────────────────────────────────────╯
 ╭─────────────────────────────────────────╮
-│ Space = jump   Q = quit                │
+│ Space = jump   Q = quit                 │
 ╰─────────────────────────────────────────╯
 ```
